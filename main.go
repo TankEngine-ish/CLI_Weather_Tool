@@ -93,7 +93,7 @@ func main() {
 		}
 
 		message := fmt.Sprintf("%s - %.0fC, %.0f%%, %s\n",
-			date.Format("15:04"),
+			date.Format("02-01-2006 15:04:05"),
 			hour.TempC,
 			hour.ChanceOfRain,
 			hour.Condition.Text,
