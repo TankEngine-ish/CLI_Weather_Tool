@@ -6,16 +6,16 @@ The output shows the weather for the day up till the end of it.
 
 ![alt text](assets/3123123123123.png)
 
-## Prerequisites
+# Prerequisites
 Go programming language (version 1.16 or later)
 An API key from WeatherAPI
 
-## Installation
+# Installation
 Clone the repository: `git clone https://github.com/yourusername/weather-cli.git`
 
 Build the application: `go build -o <name of the build>`
 
-## Usage
+# Usage
 Before you can use the application, you need to set up your WeatherAPI key. Create a .env file in the project root and add your API key:
 `echo "WEATHER_API_KEY=your_api_key" > .env`
 
@@ -28,9 +28,9 @@ By default, the application will show the weather forecast for Varna, Bulgaria. 
 
 ![alt text](assets/3123123.png)
 
-## Add to PATH
+# Add to PATH
 To use the weather command from any location on your system, you need to add it to your PATH.
 
-# Linux/MacOS
+## Linux/MacOS
 Move the weather binary to /usr/local/bin.
 
