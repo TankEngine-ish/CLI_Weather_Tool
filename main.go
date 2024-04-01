@@ -7,10 +7,13 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
+	"github.com/fatih/color"
 	"github.com/joho/godotenv"
 )
 
+// this struct maps to the json response of the API call
 type Weather struct {
 	Location struct {
 		Name    string `json:"name"`
@@ -25,7 +28,7 @@ type Weather struct {
 	Forecast struct {
 		Forecastday []struct {
 			Hour []struct {
-				TimeEpoch int     `json:"time_epoch"`
+				TimeEpoch int64   `json:"time_epoch"`
 				TempC     float64 `json:"temp_c"`
 				Condition struct {
 					Text string `json:"text"`
@@ -37,13 +40,13 @@ type Weather struct {
 }
 
 func main() {
-	// Load .env file
+	// Loads the .env file
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
 
-	// Get the API key from the environment variable
+	// Gets the API key from the environment variable
 	apiKey := os.Getenv("WEATHER_API_KEY")
 
 	res, err := http.Get("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=Varna&days=1&aqi=no&alerts=no")
@@ -67,11 +70,32 @@ func main() {
 		panic(err)
 	}
 
-	location, current, _ := weather.Location, weather.Current, weather.Forecast.Forecastday[0].Hour
+	location, current, hours := weather.Location, weather.Current, weather.Forecast.Forecastday[0].Hour
 	fmt.Printf("Location: %s, %s: %.0fC, %s\n",
 		location.Name,
 		location.Country,
 		current.TempC,
 		current.Condition.Text,
 	)
+
+	for _, hour := range hours {
+		date := time.Unix(hour.TimeEpoch, 0)
+
+		if date.Before(time.Now()) {
+			continue
+		}
+
+		message := fmt.Sprintf("%s - %.0fC, %.0f%%, %s\n",
+			date.Format("15:04"),
+			hour.TempC,
+			hour.ChanceOfRain,
+			hour.Condition.Text,
+		)
+		// prints the message in red if the chance of rain is above 50%
+		if hour.ChanceOfRain < 50 {
+			fmt.Print(message)
+		} else {
+			color.Red(message)
+		}
+	}
 }
