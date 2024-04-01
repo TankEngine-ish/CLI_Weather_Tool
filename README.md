@@ -23,10 +23,10 @@ Create a .env file in the project root and add your API key:
 
 Replace your_api_key with your actual WeatherAPI key from here - https://www.weatherapi.com/ 
 
-You can now run the application: "./<name of the build>"
+You can now run the application: ./name of the build
 
 By default, the application will show the weather forecast for Varna, Bulgaria. You can specify a different location as a command-line argument:
-"./<name of the build>" London
+./name of the build London
 
 ![alt text](assets/3123123.png)
 
