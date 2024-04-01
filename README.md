@@ -12,6 +12,7 @@ An API key from WeatherAPI
 
 ## Installation
 Clone the repository: `git clone https://github.com/yourusername/weather-cli.git`
+
 Build the application: `go build -o <name of the build>`
 
 ## Usage
