@@ -46,7 +46,7 @@ func main() {
 	// Get the API key from the environment variable
 	apiKey := os.Getenv("WEATHER_API_KEY")
 
-	res, err := http.Get("http://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=Varna&aqi=no")
+	res, err := http.Get("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=Varna&days=1&aqi=no&alerts=no")
 	if err != nil {
 		panic(err)
 	}
@@ -66,5 +66,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(weather)
+
+	location, current, _ := weather.Location, weather.Current, weather.Forecast.Forecastday[0].Hour
+	fmt.Printf("Location: %s, %s: %.0fC, %s\n",
+		location.Name,
+		location.Country,
+		current.TempC,
+		current.Condition.Text,
+	)
 }
