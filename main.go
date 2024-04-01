@@ -40,6 +40,13 @@ type Weather struct {
 }
 
 func main() {
+
+	q := "Varna"
+	if len(os.Args) >= 2 {
+		q = os.Args[1]
+
+	}
+
 	// Loads the .env file
 	err := godotenv.Load()
 	if err != nil {
@@ -49,7 +56,7 @@ func main() {
 	// Gets the API key from the environment variable
 	apiKey := os.Getenv("WEATHER_API_KEY")
 
-	res, err := http.Get("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=Varna&days=1&aqi=no&alerts=no")
+	res, err := http.Get("http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + q + "&days=1&aqi=no&alerts=no")
 	if err != nil {
 		panic(err)
 	}
