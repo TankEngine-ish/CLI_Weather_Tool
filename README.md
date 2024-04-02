@@ -7,14 +7,12 @@ The output shows the weather for the day up till the end of it.
 ![alt text](assets/3123123123123.png)
 
 # Prerequisites
-Go programming language (version 1.16 or later)
+Go programming language (version 1.16 or later).
 
-An API key from WeatherAPI
+An API key from WeatherAPI.
 
 # Installation
-Clone the repository: `git clone https://github.com/yourusername/weather-cli.git`
-
-Build the application: `go build -o <name of the build>`
+Clone the repository and build the application: `go build -o <name of the build>`
 
 # Usage
 Before you can use the application, you need to set up your WeatherAPI key. 
